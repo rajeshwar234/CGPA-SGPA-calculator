@@ -34,6 +34,10 @@
     .btn-sparkle {
       @apply bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-pink-300;
     }
+    /* New Gen Z gradient button style */
+    .btn-genz-gradient {
+      @apply bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-4 focus:ring-purple-300;
+    }
     /* Hide content by default, show based on active tab */
     .calculator-section {
       display: none;
@@ -80,10 +84,97 @@
       from { opacity: 1; transform: translateY(0); }
       to { opacity: 0; transform: translateY(20px); }
     }
+
+    /* Styles for the splash screen and thug life page */
+    .splash-screen, .thug-life-page, .appreciation-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(to bottom right, #f0f9ff, #e0f2fe); /* Light blue gradient */
+      text-align: center;
+      padding: 20px;
+    }
+    .thug-life-page {
+      background: linear-gradient(to bottom right, #1a202c, #2d3748); /* Darker gradient for thug life */
+      color: white;
+    }
+    .thug-life-page h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      color: #ecc94b; /* Yellowish color for emphasis */
+    }
+    .thug-life-page p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+    .thug-life-page .emoji {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    .appreciation-page {
+      background: linear-gradient(to bottom right, #ffe4e6, #ffc0cb); /* Pinkish gradient */
+      color: #881337; /* Darker pink text */
+    }
+    .appreciation-page h1 {
+      font-size: 3.5rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      color: #be185d; /* Deeper pink */
+    }
+    .appreciation-page p {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+    .appreciation-page .emoji {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
   </style>
 </head>
 <body class="bg-gradient-to-br from-blue-100 to-purple-200 min-h-screen flex items-center justify-center p-4 sm:p-6">
-  <div class="bg-white shadow-2xl rounded-2xl p-6 sm:p-8 w-full max-w-2xl">
+
+  <div id="splashScreen" class="splash-screen">
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
+      <h1 class="text-3xl font-extrabold text-gray-800 mb-6">
+        KARE CGPA & SGPA Calculator
+      </h1>
+      <p class="text-xl text-gray-700 mb-8">
+        Do you know how to calculate CGPA and SGPA in our university?
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <button onclick="showThugLifePage()" class="btn-primary btn-green">
+          Yes, I know!
+        </button>
+        <button onclick="showAppreciationPage()" class="btn-primary btn-red">
+          No, I need help!
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="appreciationPage" class="hidden appreciation-page">
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-xl">
+      <div class="emoji">💖</div>
+      <h1 class="text-rose-700">It takes courage to ask for help!</h1>
+      <p class="text-pink-800 mb-6">
+        Don't worry, I've got your back! Calculating CGPA can sometimes be tricky or time-consuming, but that’s exactly why I’m here. Your willingness to calculate and improve is truly admirable.Together, we’ll breeze through those numbers and keep you on track for academic success. Let's get those numbers sorted, smarty pants!
+      </p>
+      <div class="emoji">✨</div>
+    </div>
+  </div>
+
+  <div id="mainCalculatorContent" class="hidden bg-white shadow-2xl rounded-2xl p-6 sm:p-8 w-full max-w-2xl">
     <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-2">
       KARE CGPA & SGPA Calculator
     </h1>
@@ -263,14 +354,72 @@
     <div class="mt-8 text-center text-sm text-gray-700 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
       <p class="font-bold text-yellow-800 mb-2">Note on this Calculator:</p>
       <p class="mb-2">This is a practice-based project calculator and provides approximate results. Kalasalingam Academy of Research and Education (KARE) follows a Relative Grading policy, where official CGPA and SGPA will be calculated based on the class or slot average of the respective course. Therefore, the actual official results may vary.</p>
-      <p>I'd love to hear from you drop your suggestions or feedback anytime at my inbox! i'm all ears!! <a href="mailto:rajeshwarcn@gmail.com" class="text-blue-600 hover:underline">rajeshwarcn@gmail.com</a>.</p>
+      <p>I'd love to hear from you drop your suggestions or feedback anytime at my inbox! I'm all ears!! <a href="mailto:rajeshwarcn@gmail.com" class="text-blue-600 hover:underline">rajeshwarcn@gmail.com</a>.</p>
     </div>
   </div>
+
+  <div id="thugLifePage" class="hidden thug-life-page">
+    <div class="bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-md">
+      <div class="emoji">😎</div>
+      <h1 class="text-yellow-400">Oh, you're a genius, huh?</h1>
+      <p class="text-gray-300 mb-6">
+        If you already know how to calculate CGPA and SGPA without any tools, then you're clearly a topper! This humble calculator is beneath your intellectual prowess. Go forth and conquer your academics with your superior brainpower! Keep flexing those “manual skills” — someone’s gotta keep the 90s alive 😂
+      </p>
+      <p class="text-gray-400 text-sm mb-8">
+        (Just kidding... mostly. I still love you, even if you're too smart for me. 😉)
+      </p>
+      <button onclick="showMainCalculator()" class="btn-primary btn-genz-gradient flex items-center justify-center space-x-2 shadow-2xl border border-white/30">
+        <span>No way I’m stuck in the 90s — I’m Gen Z, so fine, I’ll use this tool.</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+          <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
 
   <script>
     let semesterCount = 0; // Tracks the number of semesters added for CGPA
     let courseCount = 0;   // Tracks the number of courses added for SGPA
     const gradeOptions = ['S', 'A', 'B', 'C', 'D', 'E', 'P', 'U', 'W']; // KARE grades
+
+    /**
+     * Shows the main calculator content after a delay and hides other screens.
+     */
+    function showMainCalculator() {
+      document.getElementById('splashScreen').classList.add('hidden');
+      document.getElementById('thugLifePage').classList.add('hidden');
+      document.getElementById('appreciationPage').classList.add('hidden'); // Hide appreciation page
+      document.getElementById('mainCalculatorContent').classList.remove('hidden');
+      document.getElementById('mainCalculatorContent').classList.add('active'); // Apply fade-in
+      showCalculator('sgpa'); // Default to SGPA calculator when main content is shown
+    }
+
+    /**
+     * Shows the "Thug Life" satirical page and hides other content.
+     */
+    function showThugLifePage() {
+      document.getElementById('splashScreen').classList.add('hidden');
+      document.getElementById('mainCalculatorContent').classList.add('hidden');
+      document.getElementById('appreciationPage').classList.add('hidden'); // Hide appreciation page
+      document.getElementById('thugLifePage').classList.remove('hidden');
+    }
+
+    /**
+     * Shows the appreciation page for a brief moment, then transitions to the main calculator.
+     */
+    function showAppreciationPage() {
+      document.getElementById('splashScreen').classList.add('hidden');
+      document.getElementById('mainCalculatorContent').classList.add('hidden');
+      document.getElementById('thugLifePage').classList.add('hidden');
+      document.getElementById('appreciationPage').classList.remove('hidden');
+
+      // After a short delay, transition to the main calculator
+      setTimeout(() => {
+        showMainCalculator();
+      }, 3000); // Display appreciation message for 3 seconds
+    }
+
 
     /**
      * Toggles the visibility of the CGPA and SGPA calculator sections.
@@ -290,6 +439,7 @@
         sgpaTabBtn.classList.add('bg-purple-400');
         sgpaTabBtn.classList.remove('bg-purple-600');
         // Ensure CGPA calculator has at least one semester input when shown
+        // Only add a new semester if no previous CGPA is entered AND no semesters are currently displayed
         if (semesterCount === 0 && document.getElementById('prevCgpa').value === '') {
           addSemester();
         }
@@ -301,7 +451,7 @@
         sgpaTabBtn.classList.remove('bg-purple-400');
         cgpaTabBtn.classList.add('bg-blue-400');
         cgpaTabBtn.classList.remove('bg-blue-600');
-        // Ensure SGPA calculator has at least one course input when shown initially if no numCourses is set
+        // Ensure SGPA calculator has at least one course input when shown
         if (courseCount === 0 && document.getElementById('sgpaPrevCgpa').value === '' && document.getElementById('numCoursesThisSemester').value === '') {
           addCourse();
         }
@@ -812,7 +962,11 @@
 
     // Initialize with SGPA calculator shown by default when the page loads
     window.onload = function() {
-      showCalculator('sgpa');
+      // Initially show the splash screen
+      document.getElementById('splashScreen').classList.remove('hidden');
+      document.getElementById('mainCalculatorContent').classList.add('hidden');
+      document.getElementById('thugLifePage').classList.add('hidden');
+      document.getElementById('appreciationPage').classList.add('hidden'); // Ensure appreciation page is hidden initially
     };
   </script>
 </body>
