@@ -6,12 +6,13 @@
   <title>KARE CGPA & SGPA Calculator</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Custom styles for better aesthetics and responsiveness */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
     .input-field {
-      @apply w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out; /* Added ease-in-out */
+      @apply w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ease-in-out;
     }
     .btn-primary {
       @apply w-full px-4 py-3 rounded-xl font-bold text-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md;
@@ -34,19 +35,15 @@
     .btn-sparkle {
       @apply bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-pink-300;
     }
-    /* New Gen Z gradient button style */
-    .btn-genz-gradient {
-      @apply bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-4 focus:ring-purple-300;
-    }
-    /* Hide content by default, show based on active tab */
+
     .calculator-section {
       display: none;
-      opacity: 0; /* Start hidden for fade-in */
-      transition: opacity 0.5s ease-in-out; /* Fade transition */
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
     }
     .calculator-section.active {
       display: block;
-      opacity: 1; /* Fade in */
+      opacity: 1;
     }
     .loading-spinner {
         border: 4px solid #f3f3f3;
@@ -61,7 +58,6 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
-    /* Animation for result change */
     .result-pop {
       animation: resultPop 0.3s ease-out;
     }
@@ -69,7 +65,6 @@
       0% { transform: scale(0.9); opacity: 0.7; }
       100% { transform: scale(1); opacity: 1; }
     }
-    /* Animation for adding/removing semester/course blocks */
     .fade-in-up {
       animation: fadeInUp 0.3s ease-out;
     }
@@ -84,103 +79,23 @@
       from { opacity: 1; transform: translateY(0); }
       to { opacity: 0; transform: translateY(20px); }
     }
-
-    /* Styles for the splash screen and thug life page */
-    .splash-screen, .thug-life-page, .appreciation-page {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      background: linear-gradient(to bottom right, #f0f9ff, #e0f2fe); /* Light blue gradient */
-      text-align: center;
-      padding: 20px;
-    }
-    .thug-life-page {
-      background: linear-gradient(to bottom right, #1a202c, #2d3748); /* Darker gradient for thug life */
-      color: white;
-    }
-    .thug-life-page h1 {
-      font-size: 3rem;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-      color: #ecc94b; /* Yellowish color for emphasis */
-    }
-    .thug-life-page p {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-      max-width: 600px;
-    }
-    .thug-life-page .emoji {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-    }
-    .appreciation-page {
-      background: linear-gradient(to bottom right, #ffe4e6, #ffc0cb); /* Pinkish gradient */
-      color: #881337; /* Darker pink text */
-    }
-    .appreciation-page h1 {
-      font-size: 3.5rem;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-      color: #be185d; /* Deeper pink */
-    }
-    .appreciation-page p {
-      font-size: 1.8rem;
-      margin-bottom: 2rem;
-      max-width: 700px;
-      line-height: 1.5;
-    }
-    .appreciation-page .emoji {
-      font-size: 5rem;
-      margin-bottom: 1rem;
-      animation: bounce 1s infinite;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
   </style>
 </head>
-<body class="bg-gradient-to-br from-blue-100 to-purple-200 min-h-screen flex items-center justify-center p-4 sm:p-6">
+<body class="bg-gradient-to-br from-blue-100 to-purple-200 min-h-screen flex items-center justify-center p-4 sm:p-6 text-gray-800">
 
-  <div id="splashScreen" class="splash-screen">
-    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
-      <h1 class="text-3xl font-extrabold text-gray-800 mb-6">
+  <div id="mainCalculatorContent" class="bg-white shadow-2xl rounded-2xl p-6 sm:p-8 w-full max-w-2xl active">
+    
+    <div class="flex flex-col items-center mb-6">
+      <svg class="h-16 w-16 text-blue-500 mb-2 animate-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+      </svg>
+      <h1 class="text-4xl font-extrabold text-gray-800 mb-1">
         KARE CGPA & SGPA Calculator
       </h1>
-      <p class="text-xl text-gray-700 mb-8">
-        Do you know how to calculate CGPA and SGPA in our university?
+      <p class="text-center text-gray-600 text-md font-medium">
+        -  Visit my website: <a href="https://rajeswar.tech" target="_blank" class="text-blue-600 hover:underline">rajeswar.tech</a>
       </p>
-      <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-        <button onclick="showThugLifePage()" class="btn-primary btn-green">
-          Yes, I know!
-        </button>
-        <button onclick="showAppreciationPage()" class="btn-primary btn-red">
-          No, I need help!
-        </button>
-      </div>
     </div>
-  </div>
-
-  <div id="appreciationPage" class="hidden appreciation-page">
-    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-xl">
-      <div class="emoji">💖</div>
-      <h1 class="text-rose-700">It takes courage to ask for help!</h1>
-      <p class="text-pink-800 mb-6">
-        Don't worry, I've got your back! Calculating CGPA can sometimes be tricky or time-consuming, but that’s exactly why I’m here. Your willingness to calculate and improve is truly admirable.Together, we’ll breeze through those numbers and keep you on track for academic success. Let's get those numbers sorted, smarty pants!
-      </p>
-      <div class="emoji">✨</div>
-    </div>
-  </div>
-
-  <div id="mainCalculatorContent" class="hidden bg-white shadow-2xl rounded-2xl p-6 sm:p-8 w-full max-w-2xl">
-    <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-2">
-      KARE CGPA & SGPA Calculator
-    </h1>
-    <p class="text-center text-gray-600 text-lg font-medium mb-8">
-      -  Implemented by <a href="https://www.linkedin.com/in/rajeswar-charapalli-21261028a" target="_blank" class="text-blue-600 hover:underline">RAJ</a>
-    </p>
 
     <div class="flex justify-center space-x-4 mb-8">
       <button id="sgpaTabBtn" onclick="showCalculator('sgpa')" class="px-6 py-3 rounded-xl font-bold text-lg bg-purple-600 text-white hover:bg-purple-700 focus:outline-none focus:ring-4 focus:ring-purple-300 transition duration-300 ease-in-out transform hover:scale-105 shadow-md">
@@ -199,21 +114,21 @@
 
       <div id="previousCgpaInput" class="mb-4 p-4 border rounded-xl bg-gray-50 shadow-sm">
         <h2 class="text-lg font-semibold mb-3 text-gray-800">Calculate CGPA from Previous Semesters</h2>
-        <p class="text-sm text-gray-500 mb-3">
+        <p class="text-sm text-gray-700 mb-3">
           Fill all fields below to calculate CGPA from a previous cumulative CGPA and then add subsequent semesters.
           If these fields are filled, individual semester inputs will build upon this.
         </p>
         <label class="block mb-3">
           <span class="text-gray-700 text-sm font-medium">CGPA up to Semester:</span>
-          <input type="number" id="prevCgpa" class="input-field" placeholder="e.g., 7.25" min="0" max="10" step="0.01" oninput="calculateCGPA()" />
+          <input type="number" id="prevCgpa" class="input-field bg-white text-gray-800" placeholder="e.g., 7.25" min="0" max="10" step="0.01" oninput="calculateCGPA()" />
         </label>
         <label class="block mb-3">
           <span class="text-gray-700 text-sm font-medium">Total Credits up to that Semester:</span>
-          <input type="number" id="prevCredits" class="input-field" placeholder="e.g., 68" min="0" step="0.5" oninput="calculateCGPA()" />
+          <input type="number" id="prevCredits" class="input-field bg-white text-gray-800" placeholder="e.g., 68" min="0" step="0.5" oninput="calculateCGPA()" />
         </label>
         <label class="block mb-3">
           <span class="text-gray-700 text-sm font-medium">Number of Semesters Completed (for reference):</span>
-          <input type="number" id="numSemestersCompleted" class="input-field" placeholder="e.g., 3" min="0" step="1" oninput="calculateCGPA()" />
+          <input type="number" id="numSemestersCompleted" class="input-field bg-white text-gray-800" placeholder="e.g., 3" min="0" step="1" oninput="calculateCGPA()" />
         </label>
       </div>
 
@@ -242,28 +157,28 @@
         <p id="cgpaResult" class="mt-2 text-6xl font-extrabold text-green-700">0.00</p>
       </div>
 
-      <div class="mt-8 p-6 bg-purple-50 rounded-lg shadow-xl text-center">
+      <div class="mt-8 p-6 bg-purple-100 rounded-lg shadow-xl text-center border-2 border-purple-200">
         <h2 class="text-xl font-bold text-purple-800 mb-4">Academic Goal Setter </h2>
-        <p class="text-sm text-gray-700 mb-4">
+        <p class="text-sm text-purple-700 mb-4">
           Enter your desired final CGPA, and let's generate a plan to help you achieve it!
         </p>
         <div class="mb-4">
             <label class="block mb-3">
               <span class="text-gray-700 text-sm font-medium">Your Current CGPA:</span>
-              <input type="number" id="currentCgpaForGoalSetter" class="input-field" placeholder="e.g., 7.50" min="0" max="10" step="0.01" />
+              <input type="number" id="currentCgpaForGoalSetter" class="input-field bg-white text-gray-800" placeholder="e.g., 7.50" min="0" max="10" step="0.01" />
             </label>
             <label class="block mb-3">
               <span class="text-gray-700 text-sm font-medium">Number of Semesters Completed:</span>
-              <input type="number" id="semestersCompletedForGoalSetter" class="input-field" placeholder="e.g., 4" min="0" step="1" />
+              <input type="number" id="semestersCompletedForGoalSetter" class="input-field bg-white text-gray-800" placeholder="e.g., 4" min="0" step="1" />
             </label>
             <label class="block mb-3">
               <span class="text-gray-700 text-sm font-medium">Total Credits Studied So Far:</span>
-              <input type="number" id="creditsStudiedForGoalSetter" class="input-field" placeholder="e.g., 88" min="0" step="0.5" />
+              <input type="number" id="creditsStudiedForGoalSetter" class="input-field bg-white text-gray-800" placeholder="e.g., 88" min="0" step="0.5" />
             </label>
         </div>
         <label class="block mb-3">
           <span class="text-gray-700 text-sm font-medium">Desired Final CGPA:</span>
-          <input type="number" id="targetFinalCgpa" class="input-field" placeholder="e.g., 8.0" min="0" max="10" step="0.01" />
+          <input type="number" id="targetFinalCgpa" class="input-field bg-white text-gray-800" placeholder="e.g., 8.0" min="0" max="10" step="0.01" />
         </label>
         <button onclick="getAcademicPlan()" class="btn-primary btn-sparkle flex items-center justify-center space-x-2">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -271,7 +186,7 @@
           </svg>
           <span>Get Target SGPA Plan</span>
         </button>
-        <div id="academicPlanResult" class="mt-4 text-left text-gray-800 bg-white p-4 rounded-lg shadow-inner hidden">
+        <div id="academicPlanResult" class="mt-4 text-left text-gray-700 bg-white p-4 rounded-lg shadow-inner hidden border border-purple-300">
             <div id="academicPlanLoading" class="loading-spinner hidden"></div>
             <p id="academicPlanText"></p>
         </div>
@@ -289,42 +204,14 @@
         <span class="font-semibold text-red-600">Important:</span> As our university follows a Relative Grading policy, these are just approximate and predicted results, as the official SGPA will be calculated based on the class or slot average of the respective course.
       </p>
 
-      <div id="sgpaByCgpaDifferenceInput" class="mb-4 p-4 border rounded-xl bg-gray-50 shadow-sm">
-        <h2 class="text-lg font-semibold mb-3 text-gray-800">Calculate SGPA from CGPA Difference</h2>
-        <p class="text-sm text-gray-500 mb-3">
-          Fill all fields below to calculate SGPA for a specific semester if you know your CGPA before and after it.
-          If these fields are filled, individual course inputs will be ignored for calculation.
-        </p>
-        <label class="block mb-3">
-          <span class="text-gray-700 text-sm font-medium">CGPA Before this Semester:</span>
-          <input type="number" id="sgpaPrevCgpa" class="input-field" placeholder="e.g., 7.28" min="0" max="10" step="0.01" oninput="calculateSGPA()" />
-        </label>
-        <label class="block mb-3">
-          <span class="text-gray-700 text-sm font-medium">Total Credits Before this Semester:</span>
-          <input type="number" id="sgpaPrevCredits" class="input-field" placeholder="e.g., 68" min="0" step="0.5" oninput="calculateSGPA()" />
-        </label>
-        <label class="block mb-3">
-          <span class="text-gray-700 text-sm font-medium">CGPA After this Semester:</span>
-          <input type="number" id="sgpaAfterCgpa" class="input-field" placeholder="e.g., 7.37" min="0" max="10" step="0.01" oninput="calculateSGPA()" />
-        </label>
-        <label class="block mb-3">
-          <span class="text-gray-700 text-sm font-medium">Total Credits After this Semester:</span>
-          <input type="number" id="sgpaAfterCredits" class="input-field" placeholder="e.g., 92" min="0" step="0.5" oninput="calculateSGPA()" />
-        </label>
-      </div>
-
-      <p class="text-sm text-center text-blue-700 font-semibold mb-6">
-        Please choose ONE method for SGPA calculation: either fill the 'CGPA Difference' section OR use the 'Number of Courses' option below. Do not use both simultaneously.
-      </p>
-
       <div class="mb-4 p-4 border rounded-xl bg-gray-50 shadow-sm">
         <h2 class="text-lg font-semibold mb-3 text-gray-800">Calculate SGPA by Individual Course Grades</h2>
-        <p class="text-sm text-gray-500 mb-3">
+        <p class="text-sm text-gray-700 mb-3">
           Enter the number of courses you studied this semester, and fields will appear for you to input credits and grades.
         </p>
         <label class="block mb-3">
           <span class="text-gray-700 text-sm font-medium">Number of Courses Studied this Semester:</span>
-          <input type="number" id="numCoursesThisSemester" class="input-field" placeholder="e.g., 6" min="1" step="1" oninput="generateCourseInputs()" />
+          <input type="number" id="numCoursesThisSemester" class="input-field bg-white text-gray-800" placeholder="e.g., 6" min="1" step="1" oninput="generateCourseInputs()" />
         </label>
       </div>
 
@@ -337,6 +224,34 @@
         <button onclick="calculateSGPA()" class="btn-primary btn-green">
           Calculate SGPA
         </button>
+      </div>
+      
+      <p class="text-sm text-center text-blue-700 font-semibold mb-6">
+        Please choose ONE method for SGPA calculation: either fill the 'CGPA Difference' section OR use the 'Number of Courses' option below. Do not use both simultaneously.
+      </p>
+
+      <div id="sgpaByCgpaDifferenceInput" class="mb-4 p-4 border rounded-xl bg-gray-50 shadow-sm">
+        <h2 class="text-lg font-semibold mb-3 text-gray-800">Calculate SGPA from CGPA Difference</h2>
+        <p class="text-sm text-gray-700 mb-3">
+          Fill all fields below to calculate SGPA for a specific semester if you know your CGPA before and after it.
+          If these fields are filled, individual course inputs will be ignored for calculation.
+        </p>
+        <label class="block mb-3">
+          <span class="text-gray-700 text-sm font-medium">CGPA Before this Semester:</span>
+          <input type="number" id="sgpaPrevCgpa" class="input-field bg-white text-gray-800" placeholder="e.g., 7.28" min="0" max="10" step="0.01" oninput="calculateSGPA()" />
+        </label>
+        <label class="block mb-3">
+          <span class="text-gray-700 text-sm font-medium">Total Credits Before this Semester:</span>
+          <input type="number" id="sgpaPrevCredits" class="input-field bg-white text-gray-800" placeholder="e.g., 68" min="0" step="0.5" oninput="calculateSGPA()" />
+        </label>
+        <label class="block mb-3">
+          <span class="text-gray-700 text-sm font-medium">CGPA After this Semester:</span>
+          <input type="number" id="sgpaAfterCgpa" class="input-field bg-white text-gray-800" placeholder="e.g., 7.37" min="0" max="10" step="0.01" oninput="calculateSGPA()" />
+        </label>
+        <label class="block mb-3">
+          <span class="text-gray-700 text-sm font-medium">Total Credits After this Semester:</span>
+          <input type="number" id="sgpaAfterCredits" class="input-field bg-white text-gray-800" placeholder="e.g., 92" min="0" step="0.5" oninput="calculateSGPA()" />
+        </label>
       </div>
 
       <div class="mt-6 p-6 bg-green-50 rounded-lg shadow-xl text-center">
@@ -358,73 +273,11 @@
     </div>
   </div>
 
-  <div id="thugLifePage" class="hidden thug-life-page">
-    <div class="bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-md">
-      <div class="emoji">😎</div>
-      <h1 class="text-yellow-400">Oh, you're a genius, huh?</h1>
-      <p class="text-gray-300 mb-6">
-        If you already know how to calculate CGPA and SGPA without any tools, then you're clearly a topper! This humble calculator is beneath your intellectual prowess. Go forth and conquer your academics with your superior brainpower! Keep flexing those “manual skills” — someone’s gotta keep the 90s alive 😂
-      </p>
-      <p class="text-gray-400 text-sm mb-8">
-        (Just kidding... mostly. I still love you, even if you're too smart for me. 😉)
-      </p>
-      <button onclick="showMainCalculator()" class="btn-primary btn-genz-gradient flex items-center justify-center space-x-2 shadow-2xl border border-white/30">
-        <span>No way I’m stuck in the 90s — I’m Gen Z, so fine, I’ll use this tool.</span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-          <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-        </svg>
-      </button>
-    </div>
-  </div>
-
-
   <script>
-    let semesterCount = 0; // Tracks the number of semesters added for CGPA
-    let courseCount = 0;   // Tracks the number of courses added for SGPA
-    const gradeOptions = ['S', 'A', 'B', 'C', 'D', 'E', 'P', 'U', 'W']; // KARE grades
+    let semesterCount = 0;
+    let courseCount = 0;
+    const gradeOptions = ['S', 'A', 'B', 'C', 'D', 'E', 'P', 'U', 'W'];
 
-    /**
-     * Shows the main calculator content after a delay and hides other screens.
-     */
-    function showMainCalculator() {
-      document.getElementById('splashScreen').classList.add('hidden');
-      document.getElementById('thugLifePage').classList.add('hidden');
-      document.getElementById('appreciationPage').classList.add('hidden'); // Hide appreciation page
-      document.getElementById('mainCalculatorContent').classList.remove('hidden');
-      document.getElementById('mainCalculatorContent').classList.add('active'); // Apply fade-in
-      showCalculator('sgpa'); // Default to SGPA calculator when main content is shown
-    }
-
-    /**
-     * Shows the "Thug Life" satirical page and hides other content.
-     */
-    function showThugLifePage() {
-      document.getElementById('splashScreen').classList.add('hidden');
-      document.getElementById('mainCalculatorContent').classList.add('hidden');
-      document.getElementById('appreciationPage').classList.add('hidden'); // Hide appreciation page
-      document.getElementById('thugLifePage').classList.remove('hidden');
-    }
-
-    /**
-     * Shows the appreciation page for a brief moment, then transitions to the main calculator.
-     */
-    function showAppreciationPage() {
-      document.getElementById('splashScreen').classList.add('hidden');
-      document.getElementById('mainCalculatorContent').classList.add('hidden');
-      document.getElementById('thugLifePage').classList.add('hidden');
-      document.getElementById('appreciationPage').classList.remove('hidden');
-
-      // After a short delay, transition to the main calculator
-      setTimeout(() => {
-        showMainCalculator();
-      }, 3000); // Display appreciation message for 3 seconds
-    }
-
-
-    /**
-     * Toggles the visibility of the CGPA and SGPA calculator sections.
-     * @param {string} calculatorType - 'cgpa' or 'sgpa' to show the respective calculator.
-     */
     function showCalculator(calculatorType) {
       const cgpaSection = document.getElementById('cgpaCalculator');
       const sgpaSection = document.getElementById('sgpaCalculator');
@@ -438,12 +291,10 @@
         cgpaTabBtn.classList.remove('bg-blue-400');
         sgpaTabBtn.classList.add('bg-purple-400');
         sgpaTabBtn.classList.remove('bg-purple-600');
-        // Ensure CGPA calculator has at least one semester input when shown
-        // Only add a new semester if no previous CGPA is entered AND no semesters are currently displayed
         if (semesterCount === 0 && document.getElementById('prevCgpa').value === '') {
           addSemester();
         }
-        calculateCGPA(); // Recalculate CGPA when its section is shown
+        calculateCGPA();
       } else if (calculatorType === 'sgpa') {
         sgpaSection.classList.add('active');
         cgpaSection.classList.remove('active');
@@ -451,21 +302,13 @@
         sgpaTabBtn.classList.remove('bg-purple-400');
         cgpaTabBtn.classList.add('bg-blue-400');
         cgpaTabBtn.classList.remove('bg-blue-600');
-        // Ensure SGPA calculator has at least one course input when shown
         if (courseCount === 0 && document.getElementById('sgpaPrevCgpa').value === '' && document.getElementById('numCoursesThisSemester').value === '') {
           addCourse();
         }
-        calculateSGPA(); // Recalculate SGPA when its section is shown
+        calculateSGPA();
       }
     }
 
-    /* --- SGPA Calculator Functions --- */
-
-    /**
-     * Converts a letter grade to its corresponding grade point value based on KARE system.
-     * @param {string} grade - The letter grade (e.g., 'S', 'A', 'U').
-     * @returns {number} The grade point value.
-     */
     function getGradePoint(grade) {
       switch (grade) {
         case 'S': return 10;
@@ -481,43 +324,26 @@
       }
     }
 
-    /**
-     * Adds a new course input block to the SGPA section.
-     * Each block includes fields for course credits and grade.
-     * @param {boolean} [isManual=true] - True if added manually, false if generated by numCourses.
-     */
     function addCourse(isManual = true) {
-      // If manually adding, increment courseCount and create a new unique ID
-      // If not manual (i.e., from generateCourseInputs), courseCount is managed there.
       if (isManual) {
         courseCount++;
-      } else {
-        // When generating from numCoursesThisSemester, we reset and then add.
-        // The `courseCount` will be set by the loop in `generateCourseInputs`.
-        // This `addCourse` function is then called within that loop.
-        // We need to ensure unique IDs still.
       }
-
       const container = document.createElement('div');
-      // Use a timestamp or another robust method for truly unique IDs if needed,
-      // but for this context, courseCount is fine as it's reset on full clear.
       container.id = `course-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-      container.className = "mb-4 p-4 border rounded-xl bg-gray-50 shadow-sm relative course-input-group fade-in-up"; // Added fade-in-up
+      container.className = "mb-4 p-4 border rounded-xl bg-gray-50 shadow-sm relative course-input-group fade-in-up";
 
-      // Find the current number of courses displayed to label the new one correctly
       const currentDisplayedCourses = document.querySelectorAll('#courses .course-input-group').length;
       const courseNumber = currentDisplayedCourses + 1;
-
 
       container.innerHTML = `
         <h2 class="text-lg font-semibold mb-3 text-gray-800">Course ${courseNumber}</h2>
         <label class="block mb-3">
           <span class="text-gray-700 text-sm font-medium">Credits:</span>
-          <input type="number" class="credits input-field" placeholder="e.g., 4" min="0.5" step="0.5" required oninput="calculateSGPA()" />
+          <input type="number" class="credits input-field bg-white text-gray-800" placeholder="e.g., 4" min="0.5" step="0.5" required oninput="calculateSGPA()" />
         </label>
         <label class="block mb-3">
           <span class="text-gray-700 text-sm font-medium">Grade:</span>
-          <select class="grade input-field bg-white" required onchange="calculateSGPA()">
+          <select class="grade input-field bg-white text-gray-800" required onchange="calculateSGPA()">
             ${gradeOptions.map(grade => `<option value="${grade}">${grade}</option>`).join('')}
           </select>
         </label>
@@ -531,57 +357,42 @@
       `;
 
       document.getElementById('courses').appendChild(container);
-      calculateSGPA(); // Recalculate when a new course is added
+      calculateSGPA();
     }
 
-    /**
-     * Generates a specified number of course input fields.
-     */
     function generateCourseInputs() {
         const numCoursesInput = document.getElementById('numCoursesThisSemester');
         let numCourses = parseInt(numCoursesInput.value);
         const coursesContainer = document.getElementById('courses');
 
-        // Clear existing dynamically generated courses before adding new ones
         coursesContainer.innerHTML = '';
-        courseCount = 0; // Reset internal counter for manual additions
+        courseCount = 0;
 
         if (isNaN(numCourses) || numCourses < 0) {
-            numCourses = 0; // Treat invalid input as 0 courses
+            numCourses = 0;
         }
 
         for (let i = 0; i < numCourses; i++) {
-            addCourse(false); // Call addCourse, indicating it's not a manual addition
+            addCourse(false);
         }
-        calculateSGPA(); // Recalculate after generating inputs
+        calculateSGPA();
     }
 
-    /**
-     * Removes a specific course input block from the SGPA section.
-     * @param {string} id - The ID of the course block to remove.
-     */
     function removeCourse(id) {
       const courseToRemove = document.getElementById(id);
       if (courseToRemove) {
-        courseToRemove.classList.add('fade-out-down'); // Add fade-out animation
+        courseToRemove.classList.add('fade-out-down');
         courseToRemove.addEventListener('animationend', () => {
           courseToRemove.remove();
-          // Re-label remaining courses after animation
           const remainingCourseHeaders = document.querySelectorAll('#courses h2');
           remainingCourseHeaders.forEach((header, index) => {
               header.innerText = `Course ${index + 1}`;
           });
-          calculateSGPA(); // Recalculate SGPA after removal
-        }, { once: true }); // Ensure listener is removed after one execution
+          calculateSGPA();
+        }, { once: true });
       }
     }
 
-    /**
-     * Calculates the Semester Grade Point Average (SGPA) based on
-     * the sum of (credits * grade_points) divided by the sum of total credits,
-     * OR by the difference in cumulative CGPA and credits.
-     * Displays the result on the page.
-     */
     function calculateSGPA() {
       const sgpaPrevCgpaInput = document.getElementById('sgpaPrevCgpa');
       const sgpaPrevCreditsInput = document.getElementById('sgpaPrevCredits');
@@ -593,16 +404,13 @@
       const afterCgpa = parseFloat(sgpaAfterCgpaInput.value);
       const afterCredits = parseFloat(sgpaAfterCreditsInput.value);
 
-      // Scenario 1: Calculate SGPA from CGPA difference if all fields are filled
       if (!isNaN(prevCgpa) && !isNaN(prevCredits) && !isNaN(afterCgpa) && !isNaN(afterCredits)) {
-          // Validate inputs for CGPA difference calculation
           if (prevCredits < 0 || afterCredits < 0 || prevCgpa < 0 || prevCgpa > 10 || afterCgpa < 0 || afterCgpa > 10 || afterCredits < prevCredits) {
               updateResultDisplay('Invalid Input', 'text-red-600', 'sgpaResult');
               return;
           }
 
           const currentSemCredits = afterCredits - prevCredits;
-
           if (currentSemCredits <= 0) {
               updateResultDisplay('Credits must increase', 'text-red-600', 'sgpaResult');
               return;
@@ -611,19 +419,16 @@
           const oldTotalPoints = prevCgpa * prevCredits;
           const newTotalPoints = afterCgpa * afterCredits;
           const currentSemPoints = newTotalPoints - oldTotalPoints;
-
           const calculatedSGPA = (currentSemPoints / currentSemCredits).toFixed(2);
 
-          // Validate calculated SGPA range (0-10)
           if (parseFloat(calculatedSGPA) < 0 || parseFloat(calculatedSGPA) > 10) {
               updateResultDisplay('Impossible SGPA', 'text-red-600', 'sgpaResult');
               return;
           }
 
           updateResultDisplay(calculatedSGPA, 'text-green-700', 'sgpaResult');
-          return; // Stop here, as we used the new calculation method
+          return;
       } else if (
-          // If some but not all "CGPA difference" fields are filled, it's an invalid state for this method
           (!isNaN(prevCgpa) || !isNaN(prevCredits) || !isNaN(afterCgpa) || !isNaN(afterCredits)) &&
           !(isNaN(prevCgpa) && isNaN(prevCredits) && isNaN(afterCgpa) && isNaN(afterCredits))
       ) {
@@ -631,8 +436,6 @@
           return;
       }
 
-
-      // Scenario 2: Fallback to individual course calculation if "CGPA difference" fields are not fully used
       const creditInputs = document.querySelectorAll('#sgpaCalculator .course-input-group .credits');
       const gradeSelects = document.querySelectorAll('#sgpaCalculator .course-input-group .grade');
 
@@ -640,7 +443,7 @@
       let totalCredits = 0;
       let isValid = true;
 
-      if (creditInputs.length === 0) { // If no individual courses are added
+      if (creditInputs.length === 0) {
           updateResultDisplay('0.00', 'text-green-700', 'sgpaResult');
           return;
       }
@@ -666,44 +469,33 @@
       }
     }
 
-    /**
-     * Resets the SGPA calculator by clearing all course input fields
-     * and setting the SGPA display to 0.00, including the new CGPA difference fields.
-     */
     function resetSgpaCalculator() {
-      document.getElementById('courses').innerHTML = ''; // Clear all course blocks
-      courseCount = 0; // Reset course counter
+      document.getElementById('courses').innerHTML = '';
+      courseCount = 0;
       document.getElementById('sgpaPrevCgpa').value = '';
       document.getElementById('sgpaPrevCredits').value = '';
       document.getElementById('sgpaAfterCgpa').value = '';
       document.getElementById('sgpaAfterCredits').value = '';
-      document.getElementById('numCoursesThisSemester').value = ''; // Clear number of courses input
-      updateResultDisplay('0.00', 'text-green-700', 'sgpaResult'); // Reset SGPA display
-      // No initial course added automatically on reset, user can use numCourses or Add Course
+      document.getElementById('numCoursesThisSemester').value = '';
+      updateResultDisplay('0.00', 'text-green-700', 'sgpaResult');
     }
 
-    /* --- CGPA Calculator Functions --- */
-
-    /**
-     * Adds a new semester input block to the CGPA section.
-     * Each block includes fields for total credits and SGPA for that semester.
-     */
     function addSemester() {
-      semesterCount++; // Increment semester count for unique IDs and display
+      semesterCount++;
 
       const container = document.createElement('div');
-      container.id = `semester-${semesterCount}`; // Unique ID for each semester block
-      container.className = "mb-4 p-4 border rounded-xl bg-gray-50 shadow-sm relative fade-in-up"; // Added fade-in-up
+      container.id = `semester-${semesterCount}`;
+      container.className = "mb-4 p-4 border rounded-xl bg-gray-50 shadow-sm relative fade-in-up";
 
       container.innerHTML = `
         <h2 class="text-lg font-semibold mb-3 text-gray-800">Semester ${semesterCount} SGPA</h2>
         <label class="block mb-3">
           <span class="text-gray-700 text-sm font-medium">Total Credits for Semester:</span>
-          <input type="number" class="credits input-field" placeholder="e.g., 22" min="0.5" step="0.5" required oninput="calculateCGPA()" />
+          <input type="number" class="credits input-field bg-white text-gray-800" placeholder="e.g., 22" min="0.5" step="0.5" required oninput="calculateCGPA()" />
         </label>
         <label class="block mb-3">
           <span class="text-gray-700 text-sm font-medium">SGPA for Semester:</span>
-          <input type="number" step="0.01" class="sgpa input-field" placeholder="e.g., 8.50" min="0" max="10" required oninput="calculateCGPA()" />
+          <input type="number" step="0.01" class="sgpa input-field bg-white text-gray-800" placeholder="e.g., 8.50" min="0" max="10" required oninput="calculateCGPA()" />
         </label>
         <button onclick="removeSemester(${semesterCount})"
                 class="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300 transition duration-200 transform hover:scale-110"
@@ -715,34 +507,24 @@
       `;
 
       document.getElementById('semesters').appendChild(container);
-      calculateCGPA(); // Recalculate when a new semester is added
+      calculateCGPA();
     }
 
-    /**
-     * Removes a specific semester input block from the CGPA section.
-     * @param {number} id - The ID of the semester block to remove.
-     */
     function removeSemester(id) {
       const semesterToRemove = document.getElementById(`semester-${id}`);
       if (semesterToRemove) {
-        semesterToRemove.classList.add('fade-out-down'); // Add fade-out animation
+        semesterToRemove.classList.add('fade-out-down');
         semesterToRemove.addEventListener('animationend', () => {
           semesterToRemove.remove();
-          // Re-label remaining semesters after animation
           const remainingSemesterHeaders = document.querySelectorAll('#semesters h2');
           remainingSemesterHeaders.forEach((header, index) => {
               header.innerText = `Semester ${index + 1} SGPA`;
           });
-          calculateCGPA(); // Recalculate CGPA after removal
-        }, { once: true }); // Ensure listener is removed after one execution
+          calculateCGPA();
+        }, { once: true });
       }
     }
 
-    /**
-     * Calculates the Cumulative Grade Point Average (CGPA) based on
-     * the sum of (credits * SGPA) divided by the sum of total credits.
-     * Displays the result on the page.
-     */
     function calculateCGPA() {
       const prevCgpaInput = document.getElementById('prevCgpa');
       const prevCreditsInput = document.getElementById('prevCredits');
@@ -756,18 +538,14 @@
       const prevCredits = parseFloat(prevCreditsInput.value);
       const numSemestersCompleted = parseInt(numSemestersCompletedInput.value);
 
-      // Scenario 1: User provides previous CGPA and credits
       if (!isNaN(prevCgpa) && !isNaN(prevCredits) && prevCredits > 0 && prevCgpa >= 0 && prevCgpa <= 10) {
         totalWeightedPoints += prevCgpa * prevCredits;
         totalCredits += prevCredits;
       } else if ((!isNaN(prevCgpa) && isNaN(prevCredits)) || (isNaN(prevCgpa) && !isNaN(prevCredits))) {
-         // If one is entered but not the other, it's invalid.
          updateResultDisplay('Invalid Previous Input', 'text-red-600', 'cgpaResult');
-         return; // Stop calculation
+         return;
       }
 
-
-      // Scenario 2: Add points from dynamically added semesters
       const semesterCreditInputs = document.querySelectorAll('#cgpaCalculator .credits');
       const semesterSgpaInputs = document.querySelectorAll('#cgpaCalculator .sgpa');
 
@@ -775,7 +553,6 @@
         const credits = parseFloat(semesterCreditInputs[i].value);
         const sgpa = parseFloat(semesterSgpaInputs[i].value);
 
-        // Input validation for semester rows
         if (isNaN(credits) || isNaN(sgpa) || credits <= 0 || sgpa < 0 || sgpa > 10) {
           updateResultDisplay('Invalid Semester Input', 'text-red-600', 'cgpaResult');
           isValid = false;
@@ -792,48 +569,34 @@
       }
     }
 
-    /**
-     * Resets the CGPA calculator by clearing all semester input fields
-     * and setting the CGPA display to 0.00.
-     */
     function resetCgpaCalculator() {
-      document.getElementById('semesters').innerHTML = ''; // Clear all semester blocks
-      semesterCount = 0; // Reset semester counter
-      document.getElementById('prevCgpa').value = ''; // Clear previous CGPA
-      document.getElementById('prevCredits').value = ''; // Clear previous credits
-      document.getElementById('numSemestersCompleted').value = ''; // Clear new input
-      document.getElementById('currentCgpaForGoalSetter').value = ''; // Clear direct input for goal setter
-      document.getElementById('semestersCompletedForGoalSetter').value = ''; // Clear direct input for goal setter
-      document.getElementById('creditsStudiedForGoalSetter').value = ''; // Clear new input for goal setter
-      document.getElementById('targetFinalCgpa').value = ''; // Clear target CGPA
-      document.getElementById('academicPlanResult').classList.add('hidden'); // Hide plan result
-      document.getElementById('academicPlanText').innerText = ''; // Clear plan text
-      updateResultDisplay('0.00', 'text-green-700', 'cgpaResult'); // Reset CGPA display
-      addSemester(); // Add the initial semester back after reset
+      document.getElementById('semesters').innerHTML = '';
+      semesterCount = 0;
+      document.getElementById('prevCgpa').value = '';
+      document.getElementById('prevCredits').value = '';
+      document.getElementById('numSemestersCompleted').value = '';
+      document.getElementById('currentCgpaForGoalSetter').value = '';
+      document.getElementById('semestersCompletedForGoalSetter').value = '';
+      document.getElementById('creditsStudiedForGoalSetter').value = '';
+      document.getElementById('targetFinalCgpa').value = '';
+      document.getElementById('academicPlanResult').classList.add('hidden');
+      document.getElementById('academicPlanText').innerText = '';
+      updateResultDisplay('0.00', 'text-green-700', 'cgpaResult');
+      addSemester();
     }
 
-    /**
-     * Updates the result display for either CGPA or SGPA.
-     * @param {string} value - The value to display.
-     * @param {string} [colorClass='text-green-700'] - Tailwind class for text color.
-     * @param {string} elementId - The ID of the HTML element to update (e.g., 'cgpaResult', 'sgpaResult').
-     */
     function updateResultDisplay(value, colorClass = 'text-green-700', elementId) {
       const resultElement = document.getElementById(elementId);
       resultElement.innerText = value;
       resultElement.classList.remove('text-green-700', 'text-red-600');
       resultElement.classList.add(colorClass);
-      resultElement.classList.add('result-pop'); // Add pop animation
+      resultElement.classList.add('result-pop');
       resultElement.addEventListener('animationend', () => {
         resultElement.classList.remove('result-pop');
       }, { once: true });
     }
 
-    /**
-     * Calls the Gemini API to get an academic plan based on target CGPA.
-     */
     async function getAcademicPlan() {
-        // Prioritize direct inputs for goal setter
         let currentCGPA = parseFloat(document.getElementById('currentCgpaForGoalSetter').value);
         let numSemestersCompleted = parseInt(document.getElementById('semestersCompletedForGoalSetter').value);
         let creditsAlreadyEarned = parseFloat(document.getElementById('creditsStudiedForGoalSetter').value);
@@ -843,13 +606,12 @@
         const academicPlanLoading = document.getElementById('academicPlanLoading');
 
         academicPlanResultDiv.classList.remove('hidden');
-        academicPlanText.innerText = ''; // Clear previous text
+        academicPlanText.innerText = '';
         academicPlanLoading.classList.remove('hidden');
 
-        const MAX_DEGREE_CREDITS = 180; // KARE's maximum claimable credits
-        const AVERAGE_CREDITS_PER_SEMESTER = 22; // A reasonable average for KARE
+        const MAX_DEGREE_CREDITS = 180;
+        const AVERAGE_CREDITS_PER_SEMESTER = 22;
 
-        // Validate direct inputs for goal setter
         if (isNaN(currentCGPA) || currentCGPA < 0 || currentCGPA > 10) {
             academicPlanText.innerText = 'Please enter a valid Current CGPA (0-10) for the Academic Goal Setter.';
             academicPlanLoading.classList.add('hidden');
@@ -865,7 +627,6 @@
              academicPlanLoading.classList.add('hidden');
              return;
         }
-
 
         const targetFinalCgpa = parseFloat(document.getElementById('targetFinalCgpa').value);
 
@@ -892,39 +653,32 @@
             requiredSGPAToAchieveTarget = pointsNeededInRemainingCredits / creditsRemainingForDegree;
         }
 
-        if (requiredSGPAToAchieveTarget < 0) requiredSGPAToAchieveTarget = 0; // Cannot have negative SGPA
+        if (requiredSGPAToAchieveTarget < 0) requiredSGPAToAchieveTarget = 0;
         if (requiredSGPAToAchieveTarget > 10) {
             academicPlanText.innerText = `To reach a CGPA of ${targetFinalCgpa.toFixed(2)}, you would need an average SGPA of ${requiredSGPAToAchieveTarget.toFixed(2)} in your remaining ${creditsRemainingForDegree.toFixed(1)} credits. This target might be very challenging or mathematically impossible if it exceeds 10.00. Consider a slightly lower target CGPA.`;
             academicPlanLoading.classList.add('hidden');
             return;
         }
 
-        const totalDegreeSemesters = 8; // Still useful for context in prompt
+        const totalDegreeSemesters = 8;
         const remainingSemestersForPrompt = totalDegreeSemesters - numSemestersCompleted;
-        // Ensure remainingSemestersForPrompt is not negative
         const actualRemainingSemesters = Math.max(0, remainingSemestersForPrompt);
 
-        // Calculate a per-semester SGPA target if there are remaining semesters
         let perSemesterSGPATarget = 'N/A';
         if (actualRemainingSemesters > 0) {
-            perSemesterSGPATarget = (requiredSGPAToAchieveTarget).toFixed(2); // Assuming an even distribution
+            perSemesterSGPATarget = (requiredSGPAToAchieveTarget).toFixed(2);
         }
 
-        // Prepend the calculated per-semester SGPA target before the AI's response
         let initialPlanText = `To achieve your desired CGPA of ${targetFinalCgpa.toFixed(2)}, you will need to aim for an average SGPA of **${requiredSGPAToAchieveTarget.toFixed(2)}** across your remaining ${creditsRemainingForDegree.toFixed(1)} credits. This means you should target an SGPA of approximately **${perSemesterSGPATarget}** in each of your remaining ${actualRemainingSemesters} semesters (assuming around ${AVERAGE_CREDITS_PER_SEMESTER} credits per semester). \n\n`;
         academicPlanText.innerText = initialPlanText;
 
-
-        // Modified prompt to ask for per-semester SGPA targets
-        const prompt = `You are an academic advisor. A student currently has a CGPA of ${currentCGPA.toFixed(2)} after completing ${numSemestersCompleted} semesters with ${creditsAlreadyEarned.toFixed(1)} credits. Their degree requires a total of ${MAX_DEGREE_CREDITS} credits. They want to achieve a final CGPA of ${targetFinalCgpa.toFixed(2)}. To reach this, they need to earn an average SGPA of ${requiredSGPAToAchieveTarget.toFixed(2)} across their remaining ${creditsRemainingForDegree.toFixed(1)} credits, which typically spans ${actualRemainingSemesters} semesters.
-
-        Please provide a motivational and actionable plan for the student to achieve this target SGPA. Elaborate on how to achieve the per-semester SGPA target of ${perSemesterSGPATarget}. Include general study tips, grade distribution suggestions (e.g., aiming for how many A's, B's per semester to hit that SGPA), and encouragement. Keep it concise, around 150-250 words.`;
+        const prompt = `You are an academic advisor. A student currently has a CGPA of ${currentCGPA.toFixed(2)} after completing ${numSemestersCompleted} semesters with ${creditsAlreadyEarned.toFixed(1)} credits. Their degree requires a total of ${MAX_DEGREE_CREDITS} credits. They want to achieve a final CGPA of ${targetFinalCgpa.toFixed(2)}. To reach this, they need to earn an average SGPA of ${requiredSGPAToAchieveTarget.toFixed(2)} across their remaining ${creditsRemainingForDegree.toFixed(1)} credits, which typically spans ${actualRemainingSemesters} semesters. Please provide a motivational and actionable plan for the student to achieve this target SGPA. Elaborate on how to achieve the per-semester SGPA target of ${perSemesterSGPATarget}. Include general study tips, grade distribution suggestions (e.g., aiming for how many A's, B's per semester to hit that SGPA), and encouragement. Keep it concise, around 150-250 words.`;
 
         try {
             let chatHistory = [];
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
             const payload = { contents: chatHistory };
-            const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+            const apiKey = "";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             const response = await fetch(apiUrl, {
@@ -937,7 +691,7 @@
             if (result.candidates && result.candidates.length > 0 &&
                 result.candidates[0].content && result.candidates[0].content.parts &&
                 result.candidates[0].content.parts.length > 0) {
-                academicPlanText.innerText += result.candidates[0].content.parts[0].text; // Append AI's response
+                academicPlanText.innerText += result.candidates[0].content.parts[0].text;
             } else {
                 academicPlanText.innerText += '\nCould not generate a detailed plan. Please try again.';
             }
@@ -949,7 +703,6 @@
         }
     }
 
-    // Function to update cgpaResult display when direct inputs are used
     function updateCgpaResultDirect() {
         const currentCgpa = parseFloat(document.getElementById('currentCgpaForGoalSetter').value);
         if (!isNaN(currentCgpa)) {
@@ -959,14 +712,14 @@
         }
     }
 
+    function resetCalculator() {
+        resetCgpaCalculator();
+        resetSgpaCalculator();
+        showCalculator('sgpa');
+    }
 
-    // Initialize with SGPA calculator shown by default when the page loads
     window.onload = function() {
-      // Initially show the splash screen
-      document.getElementById('splashScreen').classList.remove('hidden');
-      document.getElementById('mainCalculatorContent').classList.add('hidden');
-      document.getElementById('thugLifePage').classList.add('hidden');
-      document.getElementById('appreciationPage').classList.add('hidden'); // Ensure appreciation page is hidden initially
+      showCalculator('sgpa');
     };
   </script>
 </body>
